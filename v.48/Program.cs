@@ -10,21 +10,20 @@ namespace v._48
         {
             List<double> accountHistory = new List<double>();
             bool keepGoing = true;
-            
-            
+
+            Console.WriteLine("Welcome to National Security Bank");
+            IsPinCorrect();
             do
             {
-                Console.WriteLine("Welcome to National Security Bank");
-                IsPinCorrect();
                 int choice = Menu();
                 switch(choice)
                 {
                     case 1:
                         accountHistory.Add(Deposit());
                         break;
-                    //case 2:
-                    //    Withdraw();
-                    //    break;
+                    case 2:
+                        accountHistory.Add(Withdraw());
+                        break;
 
                     case 3:
 
@@ -39,6 +38,17 @@ namespace v._48
               
 
             } while (keepGoing);
+
+
+        }
+
+        static double Withdraw()
+        {
+            Console.WriteLine("How much do you wanna withdraw");
+            Success = double.TryParse(Console.ReadLine(), out double result);
+            double sum = (0 - result);
+            return sum;
+
 
 
         }
