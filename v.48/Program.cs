@@ -14,12 +14,7 @@ namespace v._48
             string userAnswer = Console.ReadLine();
             while(keepGoing)
             IsPinCorrect(userAnswer);
-
-
-
-
-
-          
+ 
         }
         static void IsPinCorrect(string a)
         {
