@@ -10,36 +10,80 @@ namespace v._48
         {
             List<double> accountHistory = new List<double>();
             bool keepGoing = true;
+            double CurrentResult=0;
+            
 
             Console.WriteLine("Welcome to National Security Bank");
             IsPinCorrect();
             do
             {
                 int choice = Menu();
-                switch(choice)
+                switch (choice)
                 {
                     case 1:
                         accountHistory.Add(Deposit());
                         break;
                     case 2:
                         accountHistory.Add(Withdraw());
+                        Console.WriteLine("Current balance is {0} ", Balance(accountHistory));
+                        
                         break;
 
                     case 3:
-
-                        Console.WriteLine(Balance(accountHistory)); 
+                        Console.WriteLine("Current balance is {0} ", Balance(accountHistory));
                         break;
 
-                        //case 4:
-                        //    CollectInteresst();
-                        //    break;
+                    case 4:
 
+                        CurrentResult = Balance(accountHistory);
+                        double intresst =CollectIntresst(CurrentResult);
+                        accountHistory.Clear();
+                        accountHistory.Add(intresst);
+                        Console.WriteLine(intresst);
+                        break;
+
+                    case 5:
+                        Console.WriteLine("bye");
+                        keepGoing = false;
+                        break;
                 }
-              
+
 
             } while (keepGoing);
 
 
+        }
+
+         static double CollectIntresst(double accountHistory)
+        {
+           
+
+            Console.WriteLine("How many years do you wanna skip?");
+            Success = int.TryParse(Console.ReadLine(), out int years);
+
+            for (int i = 0; i < years; i++)
+            {
+                if (accountHistory <= 1000)
+                {
+                    accountHistory += accountHistory;
+                }
+                else if (accountHistory >= 1001 && accountHistory <= 5000)
+                {
+                    accountHistory *= 3;
+                }
+
+                else if (accountHistory >= 5001 && accountHistory <= 10000)
+                {
+                    accountHistory *= 4;
+                }
+
+                else if (accountHistory >= 10001)
+                {
+                    accountHistory *= 5;
+                }
+
+            }
+            return accountHistory;
         }
 
         static double Withdraw()
@@ -77,6 +121,7 @@ namespace v._48
             Console.WriteLine("2. Whitdraw money");
             Console.WriteLine("3. Check Balance");
             Console.WriteLine("4. Collect intresst");
+            Console.WriteLine("5. End");
             Success = Int32.TryParse(Console.ReadLine(), out int choice);
             return choice;
         }
@@ -87,7 +132,7 @@ namespace v._48
             bool keepGoing = true;
             while (keepGoing)
             {
-                
+
                 Console.WriteLine("Enter yout pincode: ");
                 string userAnswer = Console.ReadLine();
 
@@ -104,7 +149,7 @@ namespace v._48
                     keepGoing = false;
                 }
                 else if (success! || userAnswer.Length != 4 || userAnswer.Length != 6)
-                { 
+                {
                     Console.WriteLine("Invalid pin");
                     invaildPin++;
                 }
